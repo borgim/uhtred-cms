@@ -16,7 +16,7 @@ export async function createPost({ title, content, status }: ICreatePostProps) {
 
     console.log(actualDateFormated)
 
-    const query = `INSERT INTO post VALUES (DEFAULT, '${title}', '${content}', '${actualDateFormated}', '${status}')`
+    const query = `INSERT INTO posts VALUES (DEFAULT, '${title}', '${content}', '${actualDateFormated}', '${status}')`
     const values: any = []
 
     const conStatus: any = connected.execute(query, values)

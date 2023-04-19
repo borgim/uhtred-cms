@@ -4,7 +4,7 @@ export async function getPosts() {
   try {
     const connected = await dbconnection()
 
-    const query = 'SELECT * from post'
+    const query = 'SELECT * from posts'
     const values: any = []
 
     const [data] = await connected.execute(query, values)
