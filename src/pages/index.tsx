@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
-import { Login } from '@/Components/Login'
+import { Login } from '@/Components/Home/Login'
 import { HomeStory } from '@/Components/Home/Story'
 
 export default function Home() {
