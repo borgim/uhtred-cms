@@ -1,7 +1,6 @@
 import { getUser } from '@/lib/database/query/getUser'
 import NextAuth from 'next-auth/next'
 import GithubProvider from 'next-auth/providers/github'
-import { use } from 'react'
 
 export default NextAuth({
   providers: [

@@ -19,6 +19,9 @@ dependencies:
   eslint-config-next:
     specifier: 13.3.0
     version: 13.3.0(eslint@8.38.0)(typescript@5.0.4)
+  lucide-react:
+    specifier: ^0.168.0
+    version: 0.168.0(react@18.2.0)
   mysql2:
     specifier: ^3.2.3
     version: 3.2.3
@@ -1819,6 +1822,14 @@ packages:
   /lru-cache@8.0.5:
     resolution: {integrity: sha512-MhWWlVnuab1RG5/zMRRcVGXZLCXrZTgfwMikgzCegsPnG62yDQo5JnqKkrK4jO5iKqDAZGItAqN5CtKBCBWRUA==}
     engines: {node: '>=16.14'}
+    dev: false
+
+  /lucide-react@0.168.0(react@18.2.0):
+    resolution: {integrity: sha512-O3Qa3m9udB04tCovjHvrMbB0B7yZaqeepabr8jTZyBI2hfcyj/pUvUWhL3nA18srFbtHconzuzDxtOMWkL4Gxg==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /merge2@1.4.1:
