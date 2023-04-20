@@ -12,7 +12,7 @@ interface INavigationProps {
 
 export const Navigation = ({ pages }: INavigationProps) => {
   return (
-    <nav className="flex gap-5 text-white">
+    <nav className="flex gap-5 text-white w-[70%]">
       {pages.map((page) => {
         return (
           <ActiveLink

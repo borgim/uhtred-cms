@@ -1,15 +1,10 @@
-// import { GetServerSideProps } from 'next'
-// import { getSession, signOut } from 'next-auth/react'
-
-// import { GetServerSideProps } from 'next'
 import { GetServerSideProps } from 'next'
-import { getSession, signOut } from 'next-auth/react'
+import { getSession } from 'next-auth/react'
 
 export default function Dashboard() {
   return (
     <div className="text-white">
       <h1>Dashboard</h1>
-      <button onClick={() => signOut()}>Logout</button>
     </div>
   )
 }

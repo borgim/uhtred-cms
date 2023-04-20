@@ -1,5 +1,7 @@
 import { IPageNavigation, Navigation } from '../Nav'
 import { Logo } from '../Logo'
+import { signOut } from 'next-auth/react'
+import { LogOutIcon } from 'lucide-react'
 
 export const Header = () => {
   const pagesNavigation: IPageNavigation[] = [
@@ -14,9 +16,16 @@ export const Header = () => {
   ]
 
   return (
-    <header className="flex items-center gap-x-28 p-4">
+    <header className="flex items-center justify-between p-4">
       <Logo />
       <Navigation pages={pagesNavigation} />
+      <button
+        onClick={() => signOut()}
+        className="flex gap-2 bg-red-500 text-white p-2 rounded-md"
+      >
+        Logout
+        <LogOutIcon />
+      </button>
     </header>
   )
 }
