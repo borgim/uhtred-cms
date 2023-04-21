@@ -1,10 +1,12 @@
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
+import { Posts } from '@/Components/Dashboard/PostsList'
 
 export default function Dashboard() {
   return (
-    <div className="text-white">
-      <h1>Dashboard</h1>
+    <div className="p-4 text-white">
+      <h1 className="font-extrabold text-2xl">Dashboard</h1>
+      <Posts />
     </div>
   )
 }
