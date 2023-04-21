@@ -53,7 +53,10 @@ export const Modal = ({ title, children, isOpen, trigger }: IModalProps) => {
                 >
                   <h4 className="text-xl font-medium uppercase">{title}</h4>
 
-                  <button onClick={onTrigger}>
+                  <button
+                    onClick={onTrigger}
+                    className="w-10 flex justify-end items-center"
+                  >
                     <XIcon />
                   </button>
                 </div>
