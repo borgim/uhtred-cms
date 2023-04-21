@@ -7,6 +7,7 @@ export default function Dashboard() {
     <div className="p-4 text-white">
       <h1 className="font-extrabold text-2xl mb-10">Dashboard</h1>
       <Posts />
+      <br />
     </div>
   )
 }
