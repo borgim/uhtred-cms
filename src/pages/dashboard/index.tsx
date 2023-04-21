@@ -5,7 +5,7 @@ import { Posts } from '@/Components/Dashboard/PostsList'
 export default function Dashboard() {
   return (
     <div className="p-4 text-white">
-      <h1 className="font-extrabold text-2xl">Dashboard</h1>
+      <h1 className="font-extrabold text-2xl mb-10">Dashboard</h1>
       <Posts />
     </div>
   )

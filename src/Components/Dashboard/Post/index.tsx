@@ -41,7 +41,9 @@ export const Post = ({ post, index }: IPostProps) => {
           </div>
           <time className="w-1/6 text-sm text-gray-300">{postDate}</time>
         </div>
-        <span className="w-1/6 flex justify-center">{id}</span>
+        <span className="w-1/6 flex justify-center items-center text-gray-500">
+          #{id}
+        </span>
         <span className={`w-36 flex gap-2 items-center ${statusColor}`}>
           {statusIcon}
           {status}
