@@ -54,7 +54,7 @@ export const Post = ({ post, index }: IPostProps) => {
           <EyeIcon size={20} />
           Edit
         </Link>
-        <button className="flex gap-2 hover:underline">
+        <button className="flex gap-2 text-red-500 hover:underline">
           <TrashIcon size={20} />
           Delete
         </button>
