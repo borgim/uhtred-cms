@@ -1,7 +1,7 @@
-import { getUser } from '@/_lib/database/query/getUser'
 import NextAuth from 'next-auth/next'
 import { NextAuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
+import { getUser } from '@/_lib/database/query/getUser'
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.SECRET,
   callbacks: {
     async signIn({ profile }) {
-      const userName = profile?.login
+      const userName = profile?.name
       const email = profile?.email
 
       const { userExists } = await getUser({ user: userName, email })

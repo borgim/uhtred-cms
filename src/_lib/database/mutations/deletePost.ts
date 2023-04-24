@@ -1,7 +1,7 @@
 import { dbconnection } from '../connection'
 
 interface IDeletePost {
-  id: string
+  id: string | string[] | undefined
 }
 
 export async function deletePost({ id }: IDeletePost) {

@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from './auth/[...nextauth]'
 import { getUser } from '@/_lib/database/query/getUser'
 import { getPosts } from '@/_lib/database/query/getPosts'
-// import { deletePost } from '@/_lib/database/mutations/deletePost'
+import { deletePost } from '@/_lib/database/mutations/deletePost'
 
 export type IPost = {
   id: number
@@ -27,14 +27,14 @@ export default async function handler(
   const session = await getServerSession(req, res, authOptions)
   const PostsToApi = await getPosts()
   const { result } = await getUser({
-    email: 'pedroborgim@gmail.com',
-    user: 'borgim',
+    email: session?.user?.email,
+    user: session?.user?.name,
   })
   const userResult = result
 
-  const { query } = req
+  const { id } = req.query
 
-  console.log('query: ', query)
+  console.log('query: ', id)
 
   try {
     if (req.method === 'OPTIONS') {
@@ -45,8 +45,14 @@ export default async function handler(
 
     if (userResult?.role === 'admin') {
       return res.status(200).send({ posts: PostsToApi })
+    }
 
-      if (req.method === 'DELETE' && query)
+    if (req.method === 'DELETE' && id !== '') {
+      const deleteResult = await deletePost({ id })
+
+      return res
+        .status(200)
+        .send({ message: `o id ${id} foi deletado, ${deleteResult}` })
     }
 
     return res.status(200).send({ posts: 'aiaiaiai' })
