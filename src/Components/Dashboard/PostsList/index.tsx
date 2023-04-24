@@ -1,24 +1,8 @@
-import { useQuery } from 'react-query'
-import { IPost } from '@/pages/api/posts'
 import { Post } from '../Post'
-
-interface IPostClient {
-  posts: IPost[]
-}
+import { usePosts } from '@/hooks/usePosts'
 
 export const Posts = () => {
-  const postsData = async () => {
-    const data = await fetch('/api/posts')
-    const posts: IPostClient = await data.json()
-
-    return posts.posts
-  }
-
-  const {
-    data: posts,
-    isLoading: postsLoading,
-    error: postsError,
-  } = useQuery('posts', postsData)
+  const { data: posts, isLoading: postsLoading, error: postsError } = usePosts()
 
   if (postsLoading) {
     return (

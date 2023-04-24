@@ -1,9 +1,11 @@
 import { Modal } from '@/Components/common/Modal'
+import { usePosts } from '@/hooks/usePosts'
 import { IPost } from '@/pages/api/posts'
 import { format } from 'date-fns'
 import { CheckCircle2, Edit3Icon, EyeIcon, TrashIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useMutation } from 'react-query'
 
 interface IPostProps {
   post: IPost
@@ -12,6 +14,7 @@ interface IPostProps {
 
 export const Post = ({ post, index }: IPostProps) => {
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState<boolean>(false)
+  const { refetch: refetchPosts } = usePosts()
 
   function handleDeleteModalOpen() {
     setDeleteModalIsOpen(true)
@@ -21,7 +24,23 @@ export const Post = ({ post, index }: IPostProps) => {
     setDeleteModalIsOpen(false)
   }
 
-  const id = post.id
+  function deletePost(id: string) {
+    return fetch(`/api/posts/?id=${id}`, {
+      method: 'DELETE',
+    })
+  }
+
+  const handleDeletePost = useMutation(
+    (id: string) => {
+      setDeleteModalIsOpen(false)
+      return deletePost(id)
+    },
+    {
+      onSuccess: () => refetchPosts(),
+    },
+  )
+
+  const id = post.id.toString()
   const title = post.title
   const postDate = format(new Date(post.published_date), 'Pp')
   const status = post.status
@@ -47,7 +66,10 @@ export const Post = ({ post, index }: IPostProps) => {
             ?
           </p>
           <div className="flex justify-end">
-            <button className="flex gap-2 bg-red-500 text-white p-2 rounded-md">
+            <button
+              onClick={() => handleDeletePost.mutate(id)}
+              className="flex gap-2 bg-red-500 text-white p-2 rounded-md"
+            >
               <TrashIcon />
               Yes, delete it!
             </button>

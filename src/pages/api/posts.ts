@@ -25,37 +25,52 @@ export default async function handler(
   res: NextApiResponse<IPostData>,
 ) {
   const session = await getServerSession(req, res, authOptions)
-  const PostsToApi = await getPosts()
-  const { result } = await getUser({
-    email: session?.user?.email,
-    user: session?.user?.name,
-  })
-  const userResult = result
+  const method = req.method
+  const PostsToApi = await getPosts({})
+  const loginResult = session
+    ? await getUser({
+        email: session?.user?.email,
+        user: session?.user?.name,
+      })
+    : null
+
+  const userRole = loginResult?.result?.role || 'viewer'
 
   const { id } = req.query
 
-  console.log('query: ', id)
-
   try {
-    if (req.method === 'OPTIONS') {
-      return res.status(405).send({ message: 'Method not allowed' })
-    } else if (req.method !== 'GET' && !session) {
+    // if method is diffenrent from GET and there is no Session, unauthorized
+    if (req.method !== 'GET' && !session) {
       return res.status(401).send({ message: 'Unauthorized' })
     }
 
-    if (userResult?.role === 'admin') {
+    // if role is ADMIN
+    if (userRole === 'admin') {
+      // and method is DELETE, delete post
+      if (method === 'DELETE' && id !== '') {
+        await deletePost({ id })
+
+        return res.status(200).send({
+          message: `item with id ${id} was deleted`,
+        })
+      }
       return res.status(200).send({ posts: PostsToApi })
     }
 
-    if (req.method === 'DELETE' && id !== '') {
-      const deleteResult = await deletePost({ id })
-
-      return res
-        .status(200)
-        .send({ message: `o id ${id} foi deletado, ${deleteResult}` })
+    if (userRole !== 'viewer') {
+      console.log('editor')
     }
 
-    return res.status(200).send({ posts: 'aiaiaiai' })
+    if (userRole === 'viewer' && id) {
+      console.log('caiu aqui')
+      return res
+        .status(200)
+        .send({ posts: await getPosts({ status: 'published', id }) })
+    }
+
+    return res
+      .status(200)
+      .send({ posts: await getPosts({ status: 'published' }) })
   } catch (serverError) {
     console.log('server error: ', serverError)
 
