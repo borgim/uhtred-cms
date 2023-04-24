@@ -22,7 +22,7 @@ export const Posts = () => {
 
   if (postsLoading) {
     return (
-      <div className="flex flex-col max-w-5xl gap-5">
+      <div className="flex flex-col gap-5">
         <span className="sr-only">Loading...</span>
         <div
           role="status"
@@ -41,11 +41,11 @@ export const Posts = () => {
   }
 
   if (postsError) {
-    return <>Eror on fetching posts</>
+    return <>Error on fetching posts</>
   }
 
   return (
-    <section id="posts-list" className="max-w-5xl">
+    <section id="posts-list">
       <ul className="w-full flex flex-col gap-5">
         {posts?.map((post, index) => {
           return <Post post={post} index={index} key={post.id} />

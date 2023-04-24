@@ -1,13 +1,7 @@
 import { Modal } from '@/Components/common/Modal'
 import { IPost } from '@/pages/api/posts'
 import { format } from 'date-fns'
-import {
-  CheckCircle2,
-  Edit3Icon,
-  EyeIcon,
-  LinkIcon,
-  TrashIcon,
-} from 'lucide-react'
+import { CheckCircle2, Edit3Icon, EyeIcon, TrashIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -44,11 +38,25 @@ export const Post = ({ post, index }: IPostProps) => {
         trigger={handleDeleteModalClose}
         isOpen={deleteModalIsOpen}
       >
-        ola mundo
+        <div className="flex flex-col gap-20">
+          <p className="text-lg">
+            Are you sure you want to delete post{' '}
+            <span className="text-red-600 text-xl font-bold">
+              &quot;{title}&quot;
+            </span>
+            ?
+          </p>
+          <div className="flex justify-end">
+            <button className="flex gap-2 bg-red-500 text-white p-2 rounded-md">
+              <TrashIcon />
+              Yes, delete it!
+            </button>
+          </div>
+        </div>
       </Modal>
       <li
         key={id}
-        className={`flex justify-between items-center px-4 rounded-md ${itemColor}`}
+        className={`flex justify-between items-center pl-4 rounded-md ${itemColor} h-[74px]`}
       >
         <Link
           href={itemHref}
@@ -56,10 +64,10 @@ export const Post = ({ post, index }: IPostProps) => {
         >
           <div className="flex items-center">
             <div className="flex gap-2 items-center">
-              <LinkIcon size={16} />
-              <h2 className="w-96 font-extrabold">{title}</h2>
+              <EyeIcon size={16} />
+              <h2 className="w-96 font-extrabold truncate">{title}</h2>
             </div>
-            <time className="w-1/6 text-sm text-gray-300">{postDate}</time>
+            <time className="w-1/6 text-sm text-gray-300 pl-2">{postDate}</time>
           </div>
           <span className="w-1/6 flex justify-center items-center text-gray-500">
             #{id}
@@ -69,14 +77,10 @@ export const Post = ({ post, index }: IPostProps) => {
             {status}
           </span>
         </Link>
-        <div className="border-l-2 border-[#232323] pl-2">
-          <Link href={itemHref} className="flex gap-2 hover:underline">
-            <EyeIcon size={20} />
-            Edit
-          </Link>
+        <div className="pl-2">
           <button
             onClick={handleDeleteModalOpen}
-            className="flex gap-2 text-red-500 hover:underline"
+            className="flex justify-center items-center gap-2 bg-red-500 text-white hover:underline h-[4.5625rem] px-4 rounded-r-md hover:bg-red-600"
           >
             <TrashIcon size={20} />
             Delete
