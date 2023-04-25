@@ -25,7 +25,7 @@ export const Post = ({ post, index }: IPostProps) => {
 
   const id = post.id.toString()
   const title = post.title
-  const postDate = format(new Date(post.published_date), 'Pp')
+  const postDate = format(new Date(post.published_date), 'P')
   const status = post.status
   const statusIcon =
     status === 'draft' ? <Edit3Icon size={16} /> : <CheckCircle2 size={16} />

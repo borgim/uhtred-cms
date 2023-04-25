@@ -12,6 +12,13 @@ const postsData = async () => {
   return posts.posts
 }
 
+// const createPostApi = async () => {
+//   await fetch('/api/posts', {
+//     method: 'POST',
+//     body: JSON.stringify({}),
+//   })
+// }
+
 function deletePostApi(id: string) {
   return fetch(`/api/posts/?id=${id}`, {
     method: 'DELETE',

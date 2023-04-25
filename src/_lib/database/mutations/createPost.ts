@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { dbconnection } from '../connection'
 
 interface ICreatePostProps {
@@ -12,12 +13,14 @@ export async function createPost({ title, content, status }: ICreatePostProps) {
 
     const actualDate = new Date()
 
-    const actualDateFormated = `${actualDate.getFullYear()}-${actualDate.getMonth()}-${actualDate.getDay()}`
+    console.log(actualDate)
+
+    const actualDateFormated = format(actualDate, 'yyyy-MM-dd')
 
     console.log(actualDateFormated)
 
-    const query = `INSERT INTO posts VALUES (DEFAULT, '${title}', '${content}', '${actualDateFormated}', '${status}')`
-    const values: any = []
+    const query = `INSERT INTO posts VALUES (DEFAULT, ?, ?, ?, ?)`
+    const values: any = [title, content, actualDateFormated, status]
 
     const conStatus: any = connected.execute(query, values)
 
