@@ -5,7 +5,6 @@ import { format } from 'date-fns'
 import { CheckCircle2, Edit3Icon, EyeIcon, TrashIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
-import { useMutation } from 'react-query'
 
 interface IPostProps {
   post: IPost
@@ -14,7 +13,7 @@ interface IPostProps {
 
 export const Post = ({ post, index }: IPostProps) => {
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState<boolean>(false)
-  const { refetch: refetchPosts } = usePosts()
+  const { deletePost } = usePosts()
 
   function handleDeleteModalOpen() {
     setDeleteModalIsOpen(true)
@@ -23,22 +22,6 @@ export const Post = ({ post, index }: IPostProps) => {
   function handleDeleteModalClose() {
     setDeleteModalIsOpen(false)
   }
-
-  function deletePost(id: string) {
-    return fetch(`/api/posts/?id=${id}`, {
-      method: 'DELETE',
-    })
-  }
-
-  const handleDeletePost = useMutation(
-    (id: string) => {
-      setDeleteModalIsOpen(false)
-      return deletePost(id)
-    },
-    {
-      onSuccess: () => refetchPosts(),
-    },
-  )
 
   const id = post.id.toString()
   const title = post.title
@@ -67,7 +50,7 @@ export const Post = ({ post, index }: IPostProps) => {
           </p>
           <div className="flex justify-end">
             <button
-              onClick={() => handleDeletePost.mutate(id)}
+              onClick={() => deletePost(id)}
               className="flex gap-2 bg-red-500 text-white p-2 rounded-md"
             >
               <TrashIcon />

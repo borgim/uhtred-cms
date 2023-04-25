@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import { IPost } from '@/pages/api/posts'
 
 interface IPostClient {
@@ -12,6 +12,31 @@ const postsData = async () => {
   return posts.posts
 }
 
+function deletePostApi(id: string) {
+  return fetch(`/api/posts/?id=${id}`, {
+    method: 'DELETE',
+  })
+}
+
 export const usePosts = () => {
-  return useQuery('posts', postsData)
+  const {
+    data: posts,
+    isLoading: postsLoading,
+    refetch: refetchPosts,
+    error: postsError,
+  } = useQuery('posts', postsData)
+
+  const deletePostMutation = useMutation(
+    (id: string) => {
+      return deletePostApi(id)
+    },
+    {
+      onSuccess: () => refetchPosts(),
+    },
+  )
+  function deletePost(id: string) {
+    deletePostMutation.mutate(id)
+  }
+
+  return { posts, postsLoading, postsError, deletePost }
 }

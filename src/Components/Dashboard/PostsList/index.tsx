@@ -2,7 +2,7 @@ import { Post } from '../Post'
 import { usePosts } from '@/hooks/usePosts'
 
 export const Posts = () => {
-  const { data: posts, isLoading: postsLoading, error: postsError } = usePosts()
+  const { posts, postsLoading, postsError } = usePosts()
 
   if (postsLoading) {
     return (
