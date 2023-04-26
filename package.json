@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.26.5",
+    "@editorjs/header": "^2.7.0",
+    "@editorjs/list": "^1.8.0",
+    "@editorjs/paragraph": "^2.9.0",
+    "@editorjs/quote": "^2.5.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.37",
     "@types/react-dom": "18.0.11",
@@ -29,6 +34,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@rocketseat/eslint-config": "^1.2.0"
+    "@rocketseat/eslint-config": "^1.2.0",
+    "@types/editorjs__header": "^2.6.0"
   }
 }

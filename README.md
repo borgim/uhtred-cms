@@ -2,17 +2,30 @@
 
 A simple blog CMS
 
+## ⚠️ Warning ⚠️
+
+This app is a personal project and still under development. Will be refactored later
+
 ## Functionalities
 
-  - [] Login to access dashboard
+  - [X] Login to access dashboard
   - [] Create new publication (if saved as 'draft', not publish)
-  - [] List all publications
+  - [X] List all publications
   - [] Edit existing publications
-  - [] Role admin can register new users, or remove some
+  - [] Role admin can register new users, or remove some
 
 ## Stack
 
   - Next.JS
+    - React-Query
+    - Next-Auth
+    - Date-Fns
+  - Typescript
   - MySQL
-  - Next-Auth
   - Editor.JS
+  - Tailwind
+
+  ## Improvements
+    
+    - tRPC
+    - Prisma ORM
