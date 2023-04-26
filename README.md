@@ -29,3 +29,4 @@ This app is a personal project and still under development. Will be refactored l
     
     - tRPC
     - Prisma ORM
+    - Save unfinished work on local storage
